@@ -4,21 +4,14 @@
 
 ## Installing **MeowFace Tracking Module** for **VRCFaceTracking**.
 
-[Latest Release](https://github.com/regzo2/VRCFaceTracking-MeowFace/releases)
-
-* VRCFaceTracking Module Registry
-  * Install **MeowFace Tracking Module** by looking it up in the **Module Registry** and installing directly!
-  
-* Manual
-  * Include the supplied **.dll** release in `%appdata%/VRCFaceTracking/CustomLibs`. 
+Download the latest `MeowFaceExtTrackingInterface.dll` file from the [GitHub Actions](https://github.com/BennyExtreme/VRCFaceTracking-MeowFace/actions/) page and place it in: `%APPDATA%/VRCFaceTracking/CustomLibs`
   
 **VRCFaceTracking is required to use MeowFace Tracking Module.**
   
 ## Using MeowFace with VRCFaceTracking
 
-1. Download **MeowFace** from [Google Play](https://play.google.com/store/apps/details?id=com.suvidriel.meowface&hl=en_US&gl=US)
-2. Initialize `MeowFaceExtTrackingInterface` in the **VRCFaceTracking** app.
-3. Use the information provided from **VRCFaceTracking** to configure **MeowFace** to properly send the data.
+1. Download **MeowFace** from [itch.io](https://suvidriel.itch.io/meowface)
+3. Launch the app, then enter the IP address of the PC running VRCFaceTracking along with the port number (default: 12345). You can find these details in the console.
 
 ## Troubleshooting
 
@@ -32,7 +25,7 @@ MeowFace is not all too perfect at tracking your face... however: some of the tr
   
 ## Licenses / Distribution
 
-**All source and release files fall under the [Apache-2.0 License](https://github.com/regzo2/VRCFaceTracking-Modules/blob/master/LICENSE.txt)**.
+**All source and release files fall under the [Apache-2.0 License](https://github.com/BennyExtreme/VRCFaceTracking-Modules/blob/master/LICENSE.txt)**.
 
 ## Credits
 - [Ben](https://github.com/benaclejames/) for VRCFaceTracking!
