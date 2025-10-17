@@ -1,0 +1,61 @@
+name: Build
+
+on:
+  push:
+    branches: [ master ]
+
+env:
+  RUN_NUMBER: ${{ github.run_number }}
+
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  Build:
+    name: Build
+    runs-on: windows-latest
+    
+    steps:
+      - name: Checkout VRCFaceTracking-MeowFace repository
+        uses: actions/checkout@v5.0.0
+        with:
+          submodules: recursive
+          path: VRCFaceTracking-MeowFace
+
+      - name: Checkout VRCFaceTracking repository
+        uses: actions/checkout@v5.0.0
+        with:
+          repository: benaclejames/VRCFaceTracking
+          path: VRCFaceTracking
+      
+      - name: Install MSBuild x64
+        uses: microsoft/setup-msbuild@v2
+        with:
+          msbuild-architecture: x64
+
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v2
+
+      - name: Restore NuGet packages for VRCFaceTracking
+        working-directory: VRCFaceTracking
+        run: nuget restore VRCFaceTracking.sln
+
+      - name: Restore NuGet packages for VRCFaceTracking-MeowFace
+        working-directory: VRCFaceTracking-MeowFace
+        run: nuget restore VRCFaceTracking-MeowFaceExt.sln
+      
+      - name: Build VRCFaceTracking solution
+        working-directory: VRCFaceTracking
+        run: msbuild /m /p:Configuration=Debug /p:Platform="Any CPU" .\VRCFaceTracking.sln
+
+      - name: Build VRCFaceTracking-MeowFace solution
+        working-directory: VRCFaceTracking-MeowFace
+        run: msbuild /m /p:Configuration=Release /p:Platform="Any CPU" .\VRCFaceTracking-MeowFaceExt.sln
+      
+      - name: Upload latest artifact
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: VRCFaceTracking-MeowFace-${{ env.RUN_NUMBER }}
+          path: VRCFaceTracking-MeowFace/MeowFaceExtTrackingInterface/bin/Release/net7.0/MeowFaceExtTrackingInterface.dll
+          if-no-files-found: error
